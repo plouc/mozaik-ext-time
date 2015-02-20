@@ -1,6 +1,6 @@
 {
   "name": "mozaik-ext-time",
-  "version": "0.0.1-beta",
+  "version": "0.0.2-beta",
   "description": "Mozaik time widgets",
   "repository": {
     "type": "git",
@@ -18,6 +18,9 @@
     "d3": "^3.5.5"
   },
   "main": "./components.js",
+  "scripts": {
+    "prepublish": "gulp lib"
+  },
   "devDependencies": {
     "d3": "^3.5.5",
     "del": "^1.1.1",
