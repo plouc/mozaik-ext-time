@@ -1,5 +1,7 @@
 # Mozaïk time widgets
 
+[![Travis CI](https://img.shields.io/travis/plouc/mozaik-ext-time.svg?style=flat-square)](https://travis-ci.org/plouc/mozaik-ext-time)
+
 ## Time — Clock
 
 > Not really useful, but every dashboard composition tool must have one :)
