@@ -1,6 +1,7 @@
 $time-clock-radius       = 12vmin
 $time-clock-inner-radius = 0.6vmin
 
+
 .time__clock
   &__outer-circle
     position absolute
@@ -10,7 +11,7 @@ $time-clock-inner-radius = 0.6vmin
 
     background-color transparent
     border 0.5vmin solid #000
-    
+
     border-radius $time-clock-radius
 
     width  ($time-clock-radius * 2)
@@ -36,8 +37,21 @@ $time-clock-inner-radius = 0.6vmin
 
     background #000
 
+  &__indicator
+    position absolute
 
-  &__brand
+    top  33%
+    left 0
+
+    width 100%
+
+    text-align center
+
+    font-size 3vmin
+
+    opacity 0.4
+
+  &__info
     position absolute
 
     top  63%
