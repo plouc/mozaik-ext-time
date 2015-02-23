@@ -46,16 +46,16 @@ var Clock = React.createClass({
 
         // Day/night indicator
         var sunRise = this.state.moment.clone().hours(6).minutes(0);
-        var sunSet = this.state.moment.clone().hours(18).minutes(0);
+        var sunSet  = this.state.moment.clone().hours(18).minutes(0);
 
         // Parse custom times if given
         if (this.props.sunRise) {
-            var customTime = moment(this.props.sunRise, ['HH:mm', 'H:mm', 'H:m']);
-            sunRise.hours(customTime.hours()).minutes(customTime.minutes());
+            var customSunRiseTime = moment(this.props.sunRise, ['HH:mm', 'H:mm', 'H:m']);
+            sunRise.hours(customSunRiseTime.hours()).minutes(customSunRiseTime.minutes());
         }
         if (this.props.sunSet) {
-            var customTime = moment(this.props.sunSet, ['HH:mm', 'H:mm', 'H:m']);
-            sunSet.hours(customTime.hours()).minutes(customTime.minutes());
+            var customSunSetTime = moment(this.props.sunSet, ['HH:mm', 'H:mm', 'H:m']);
+            sunSet.hours(customSunSetTime.hours()).minutes(customSunSetTime.minutes());
         }
 
         var isDay = this.state.moment.isBetween(sunRise, sunSet);
@@ -69,8 +69,8 @@ var Clock = React.createClass({
         // Textual field, defaults to config value
         var infoFields = {
             timezone: this.props.timezone ? this.props.timezone.replace(/\w+\//, '').replace('_', ' ') : this.props.timezone,
-            date: this.state.moment.format('ll'),
-            time: this.state.moment.format('LT')
+            date:     this.state.moment.format('ll'),
+            time:     this.state.moment.format('LT')
         };
         var info = infoFields[this.props.info] || this.props.info;
 
