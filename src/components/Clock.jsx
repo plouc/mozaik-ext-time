@@ -1,6 +1,6 @@
 var React    = require('react');
 var classSet = require('react-classset');
-var d3       = require('d3');
+var d3       = require('d3/d3');
 var moment   = require('moment');
 var timezone = require('moment-timezone');
 
