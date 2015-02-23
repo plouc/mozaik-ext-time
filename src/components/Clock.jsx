@@ -1,5 +1,5 @@
 var React    = require('react');
-var classSet   = require('react-classset');
+var classSet = require('react-classset');
 var d3       = require('d3');
 var moment   = require('moment');
 var timezone = require('moment-timezone');
@@ -35,13 +35,13 @@ var Clock = React.createClass({
     render() {
         var cs = classSet;
         var hoursStyle   = {
-            transform: 'rotate(' + hoursScale(this.state.hours % 12) + 'deg)'
+            transform: `rotate(${ hoursScale(this.state.hours % 12) }deg)`
         };
         var minutesStyle = {
-            transform: 'rotate(' + minutesScale(this.state.minutes) + 'deg)'
+            transform: `rotate(${ minutesScale(this.state.minutes) }deg)`
         };
         var secondsStyle = {
-            transform: 'rotate(' + secondsScale(this.state.seconds) + 'deg)'
+            transform: `rotate(${ secondsScale(this.state.seconds) }deg)`
         };
 
         // Day/night indicator
@@ -61,9 +61,9 @@ var Clock = React.createClass({
         var isDay = this.state.moment.isBetween(sunRise, sunSet);
         var timeIndicatorClasses = cs({
             'time__clock__indicator': true,
-            'fa': true,
-            'fa-sun-o': isDay,
-            'fa-moon-o': !isDay
+            'fa':                     true,
+            'fa-sun-o':               isDay,
+            'fa-moon-o':              !isDay
         });
 
         // Textual field, defaults to config value
