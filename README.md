@@ -10,12 +10,11 @@
 
 ### parameters
 
-key        | required | description
------------|----------|----------------------------------------------------
-`timezone` | no       | *Name of the timezone, like `America/Los_Angeles`. See http://momentjs.com/timezone/ for possible values. Defaults to local time.*
-`info`     | no       | *Free textual value to show within clock. Special values are: `timezone`, `date`, `time`.
-`sunRise`  | no       | *Local time when sun rises (used for day/night indicator). Defaults to `6:00`.*
-`sunSet`   | no       | *Local time when sun sets (used for day/night indicator). Defaults to `18:00`.*
+key        | required                    | description
+-----------|-----------------------------|----------------------------------------------------
+`timezone` | no *(yes if `city` is set)* | *Name of the timezone, like `America/Los_Angeles`. See http://momentjs.com/timezone/ for possible values. Defaults to local time.*
+`city`     | no                          | *Name of city used to fetch the local sunrise and -set info. By default, uses the city name from the timezone info, if available.*
+`info`     | no                          | *Free textual value to show within clock. Special values are: `timezone`, `date`, `sun`, `time`.*
 
 ### usage
 
@@ -29,13 +28,17 @@ key        | required | description
   type: 'time.clock',
   timezone: 'America/Los_Angeles',
   info: 'timezone',
-  sunRise: '6:30',
-  sunSet: '17:43',
   columns: 1, rows: 1, x: 1, y: 0
 },
 {
   type: 'time.clock',
-  info: 'Time is money!',
+  timezone: 'Europe/Helsinki',
+  city: 'Utsjoki',
   columns: 1, rows: 1, x: 2, y: 0
+},
+{
+  type: 'time.clock',
+  info: 'Time is money!',
+  columns: 1, rows: 1, x: 3, y: 0
 }
 ```
