@@ -4,6 +4,10 @@ jest.dontMock('d3/d3');
 jest.dontMock('moment');
 jest.dontMock('moment-timezone');
 
+jest.setMock('mozaik/browser', {
+    Mixin: { ApiConsumer: null }
+});
+
 var React, TestUtils, Clock, clock;
 
 describe('Time — Clock', function () {
