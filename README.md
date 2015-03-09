@@ -12,6 +12,7 @@
 
 key        | required | description
 -----------|----------|----------------------------------------------------
+`title`    | no       | *Title of the widget*
 `timezone` | no       | *Name of the timezone, like `America/Los_Angeles`. See http://momentjs.com/timezone/ for possible values. Defaults to local time.*
 `info`     | no       | *Free textual value to show within clock. Special values are: `timezone`, `date`, `time`.
 `sunRise`  | no       | *Local time when sun rises (used for day/night indicator). Defaults to `6:00`.*
