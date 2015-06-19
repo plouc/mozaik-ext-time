@@ -44,6 +44,17 @@ var Clock = React.createClass({
             transform: `rotate(${ secondsScale(this.state.seconds) }deg)`
         };
 
+        // Show title only when set
+        var title;
+        if (this.props.title) {
+            title = (
+                <div className="widget__header">
+                    {this.props.title}
+                    <i className="fa fa-clock-o" />
+                </div>
+            );
+        }
+
         // Day/night indicator
         var sunRise = this.state.moment.clone().hours(6).minutes(0);
         var sunSet  = this.state.moment.clone().hours(18).minutes(0);
@@ -76,13 +87,16 @@ var Clock = React.createClass({
 
         return (
             <div>
-                <div className="time__clock__outer-circle" />
-                <span className={timeIndicatorClasses}></span>
-                <span className="time__clock__info">{info}</span>
-                <div className="time__clock__hand time__clock__hand--seconds" style={secondsStyle} />
-                <div className="time__clock__hand time__clock__hand--minutes" style={minutesStyle} />
-                <div className="time__clock__hand time__clock__hand--hours"   style={hoursStyle} />
-                <div className="time__clock__inner-circle" />
+                {title}
+                <div className="widget__body">
+                    <div className="time__clock__outer-circle" />
+                    <span className={timeIndicatorClasses}></span>
+                    <span className="time__clock__info">{info}</span>
+                    <div className="time__clock__hand time__clock__hand--seconds" style={secondsStyle} />
+                    <div className="time__clock__hand time__clock__hand--minutes" style={minutesStyle} />
+                    <div className="time__clock__hand time__clock__hand--hours"   style={hoursStyle} />
+                    <div className="time__clock__inner-circle" />
+                </div>
             </div>
         );
     }
