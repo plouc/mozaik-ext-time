@@ -1,12 +1,12 @@
-var React    = require('react');
-var classSet = require('react-classset');
-var d3       = require('d3/d3');
-var moment   = require('moment');
-var timezone = require('moment-timezone');
+import React, { Component } from 'react';
+import classSet             from 'react-classset';
+import d3                   from 'd3/d3';
+import moment               from 'moment';
+import timezone             from 'moment-timezone';
 
 
-function getCurrentTimeParts(timezoneName) {
-    var currentTime = timezoneName ? moment().tz(timezoneName) : moment();
+const getCurrentTimeParts = function (timezoneName) {
+    let currentTime = timezoneName ? moment().tz(timezoneName) : moment();
 
     return {
         moment:  currentTime,
@@ -14,11 +14,12 @@ function getCurrentTimeParts(timezoneName) {
         minutes: currentTime.minutes(),
         seconds: currentTime.seconds()
     };
-}
+};
 
-var secondsScale = d3.scale.linear().domain([0, 59 + 999/1000]).range([-90, 270]);
-var minutesScale = d3.scale.linear().domain([0, 59 + 59/60]).range([-90, 270]);
-var hoursScale   = d3.scale.linear().domain([0, 11 + 59/60]).range([-90, 270]);
+
+const secondsScale = d3.scale.linear().domain([0, 59 + 999/1000]).range([-90, 270]);
+const minutesScale = d3.scale.linear().domain([0, 59 + 59/60]).range([-90, 270]);
+const hoursScale   = d3.scale.linear().domain([0, 11 + 59/60]).range([-90, 270]);
 
 
 var Clock = React.createClass({
@@ -102,4 +103,4 @@ var Clock = React.createClass({
     }
 });
 
-module.exports = Clock;
+export { Clock as default };
