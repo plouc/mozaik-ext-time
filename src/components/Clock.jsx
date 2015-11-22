@@ -35,30 +35,21 @@ var Clock = React.createClass({
 
     render() {
         var cs = classSet;
-        var hoursStyle   = {
+        let hoursStyle   = {
             transform: `rotate(${ hoursScale(this.state.hours % 12) }deg)`
         };
-        var minutesStyle = {
+        let minutesStyle = {
             transform: `rotate(${ minutesScale(this.state.minutes) }deg)`
         };
-        var secondsStyle = {
+        let secondsStyle = {
             transform: `rotate(${ secondsScale(this.state.seconds) }deg)`
         };
 
-        // Show title only when set
-        var title;
-        if (this.props.title) {
-            title = (
-                <div className="widget__header">
-                    {this.props.title}
-                    <i className="fa fa-clock-o" />
-                </div>
-            );
-        }
+        let { title } = this.props;
 
         // Day/night indicator
-        var sunRise = this.state.moment.clone().hours(6).minutes(0);
-        var sunSet  = this.state.moment.clone().hours(18).minutes(0);
+        let sunRise = this.state.moment.clone().hours(6).minutes(0);
+        let sunSet  = this.state.moment.clone().hours(18).minutes(0);
 
         // Parse custom times if given
         if (this.props.sunRise) {
@@ -70,8 +61,8 @@ var Clock = React.createClass({
             sunSet.hours(customSunSetTime.hours()).minutes(customSunSetTime.minutes());
         }
 
-        var isDay = this.state.moment.isBetween(sunRise, sunSet);
-        var timeIndicatorClasses = cs({
+        const isDay = this.state.moment.isBetween(sunRise, sunSet);
+        const timeIndicatorClasses = cs({
             'time__clock__indicator': true,
             'fa':                     true,
             'fa-sun-o':               isDay,
@@ -79,28 +70,44 @@ var Clock = React.createClass({
         });
 
         // Textual field, defaults to config value
-        var infoFields = {
+        const infoFields = {
             timezone: this.props.timezone ? this.props.timezone.replace(/\w+\//, '').replace('_', ' ') : this.props.timezone,
             date:     this.state.moment.format('ll'),
             time:     this.state.moment.format('LT')
         };
-        var info = infoFields[this.props.info] || this.props.info;
+        const info = infoFields[this.props.info] || this.props.info;
 
-        return (
-            <div>
-                {title}
-                <div className="widget__body">
-                    <div className="time__clock__outer-circle" />
-                    <span className={timeIndicatorClasses}></span>
-                    <span className="time__clock__info">{info}</span>
-                    <div className="time__clock__hand time__clock__hand--seconds" style={secondsStyle} />
-                    <div className="time__clock__hand time__clock__hand--minutes" style={minutesStyle} />
-                    <div className="time__clock__hand time__clock__hand--hours"   style={hoursStyle} />
-                    <div className="time__clock__inner-circle" />
-                </div>
+        const bodyClasses = title ? 'widget__body' : '';
+        const body = (
+            <div className={bodyClasses}>
+                <div className="time__clock__outer-circle" />
+                <span className={timeIndicatorClasses}></span>
+                <span className="time__clock__info">{info}</span>
+                <div className="time__clock__hand time__clock__hand--seconds" style={secondsStyle} />
+                <div className="time__clock__hand time__clock__hand--minutes" style={minutesStyle} />
+                <div className="time__clock__hand time__clock__hand--hours"   style={hoursStyle} />
+                <div className="time__clock__inner-circle" />
             </div>
         );
+
+        if (title) {
+            if (title.indexOf('::') === 0) {
+                title = this.state.moment.format(title.substring(2));
+            }
+
+            return (
+                <div>
+                    <div className="widget__header">
+                        {title}
+                        <i className="fa fa-clock-o" />
+                    </div>
+                    {body}
+                </div>
+            );
+        } else {
+            return body;
+        }
     }
 });
 
-export { Clock as default };
+export default Clock;

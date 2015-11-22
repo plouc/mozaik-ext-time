@@ -1,3 +1,7 @@
+//
+// @TODO
+// This test needs a rewrite to works with mocha!
+//
 jest.dontMock('./../components/Clock.jsx');
 jest.dontMock('react-classset');
 jest.dontMock('d3/d3');

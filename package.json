@@ -1,6 +1,6 @@
 {
   "name": "mozaik-ext-time",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Mozaik time widgets",
   "repository": {
     "type": "git",
@@ -24,10 +24,12 @@
     "react-classset": "0.0.2",
     "jquery": "^2.1.3",
     "react": "^0.13.3",
-    "react-tools": "^0.12.2",
     "reflux": "^0.2.5"
   },
   "devDependencies": {
+  },
+  "peerDependencies": {
+    "mozaik": "1.x"
   },
   "scripts": {},
   "browserify": {

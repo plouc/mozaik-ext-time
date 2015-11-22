@@ -1,3 +1,6 @@
-module.exports = {
-    Clock: require('./Clock.jsx')
+import Clock from './Clock.jsx';
+
+
+export default {
+    Clock: Clock
 };
