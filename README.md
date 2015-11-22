@@ -1,6 +1,7 @@
 # Mozaïk time widgets
 
 [![Travis CI](https://img.shields.io/travis/plouc/mozaik-ext-time.svg?style=flat-square)](https://travis-ci.org/plouc/mozaik-ext-time)
+[![NPM version](https://img.shields.io/npm/v/mozaik-ext-time.svg?style=flat-square)](https://www.npmjs.com/package/mozaik-ext-time)
 
 ## Time — Clock
 
