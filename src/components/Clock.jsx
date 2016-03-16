@@ -21,10 +21,25 @@ const secondsScale = d3.scale.linear().domain([0, 59 + 999/1000]).range([-90, 27
 const minutesScale = d3.scale.linear().domain([0, 59 + 59/60]).range([-90, 270]);
 const hoursScale   = d3.scale.linear().domain([0, 11 + 59/60]).range([-90, 270]);
 
-const sunFormats   = ['HH:mm', 'H:mm', 'H:m'];
+const sunFormats = ['HH:mm', 'H:mm', 'H:m'];
 
 
 class Clock extends Component {
+    static displayName = 'Clock';
+
+    static propTypes = {
+        title:    PropTypes.string,
+        info:     PropTypes.string,
+        timezone: PropTypes.string,
+        sunRise:  PropTypes.string.isRequired,
+        sunSet:   PropTypes.string.isRequired
+    };
+
+    static defaultProps = {
+        sunRise: '06:00',
+        sunSet:  '18:00'
+    };
+
     constructor(props) {
         super(props);
 
@@ -38,16 +53,15 @@ class Clock extends Component {
     }
 
     render() {
-        // Hands styles
         const { hours, minutes, seconds } = this.state;
 
-        const hoursStyle   = {
+        let hoursStyle   = {
             transform: `rotate(${ hoursScale(hours % 12) }deg)`
         };
-        const minutesStyle = {
+        let minutesStyle = {
             transform: `rotate(${ minutesScale(minutes) }deg)`
         };
-        const secondsStyle = {
+        let secondsStyle = {
             transform: `rotate(${ secondsScale(seconds) }deg)`
         };
 
@@ -76,13 +90,16 @@ class Clock extends Component {
         };
         const infoText = infoFields[info] || info;
 
-        const bodyClasses = classNames({ 'widget__body': !!title });
+        let { title } = this.props;
+
+        const bodyClasses = title ? 'widget__body' : '';
         const body = (
             <div className={bodyClasses}>
-                <div className="time__clock__outer-circle">
-                    <span className={timeIndicatorClasses}></span>
-                    <span className="time__clock__info">{infoText}</span>
-                </div>
+                <div className="time__clock__outer-circle" />
+                <span className={timeIndicatorClasses}></span>
+                <span className="time__clock__info">
+                    {info}
+                </span>
                 <div className="time__clock__hand time__clock__hand--seconds" style={secondsStyle} />
                 <div className="time__clock__hand time__clock__hand--minutes" style={minutesStyle} />
                 <div className="time__clock__hand time__clock__hand--hours"   style={hoursStyle} />
@@ -110,21 +127,6 @@ class Clock extends Component {
         return body;
     }
 }
-
-Clock.displayName = 'Clock';
-
-Clock.propTypes = {
-    title:    PropTypes.string,
-    info:     PropTypes.string,
-    timezone: PropTypes.string,
-    sunRise:  PropTypes.string.isRequired,
-    sunSet:   PropTypes.string.isRequired
-};
-
-Clock.defaultProps = {
-    sunRise: '06:00',
-    sunSet:  '18:00'
-};
 
 
 export default Clock;
