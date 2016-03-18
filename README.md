@@ -5,7 +5,7 @@
 
 ## Time — Clock
 
-> Show analog clock from local or anoter timezone.
+> Show analog clock from local or another timezone.
 
 ![clock](https://raw.githubusercontent.com/plouc/mozaik-ext-time/master/preview/time.clock.png)
 
@@ -15,7 +15,7 @@ key        | required | description
 -----------|----------|----------------------------------------------------
 `title`    | no       | *Title of the widget*
 `timezone` | no       | *Name of the timezone, like `America/Los_Angeles`. See http://momentjs.com/timezone/ for possible values. Defaults to local time.*
-`info`     | no       | *Free textual value to show within clock. Special values are: `timezone`, `date`, `time`.
+`info`     | no       | *Free textual value to show within clock. Special values are: `timezone`, `date`, `time`.*
 `sunRise`  | no       | *Local time when sun rises (used for day/night indicator). Defaults to `6:00`.*
 `sunSet`   | no       | *Local time when sun sets (used for day/night indicator). Defaults to `18:00`.*
 
