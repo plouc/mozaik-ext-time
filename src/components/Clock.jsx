@@ -80,9 +80,10 @@ var Clock = React.createClass({
         const bodyClasses = title ? 'widget__body' : '';
         const body = (
             <div className={bodyClasses}>
-                <div className="time__clock__outer-circle" />
-                <span className={timeIndicatorClasses}></span>
-                <span className="time__clock__info">{info}</span>
+                <div className="time__clock__outer-circle">
+                    <span className={timeIndicatorClasses}></span>
+                    <span className="time__clock__info">{info}</span>
+                </div>
                 <div className="time__clock__hand time__clock__hand--seconds" style={secondsStyle} />
                 <div className="time__clock__hand time__clock__hand--minutes" style={minutesStyle} />
                 <div className="time__clock__hand time__clock__hand--hours"   style={hoursStyle} />
