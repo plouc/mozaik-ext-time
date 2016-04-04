@@ -27,23 +27,24 @@
     "dashboard"
   ],
   "dependencies": {
-    "babelify": "7.2.0",
     "babel-core": "6.7.2",
     "babel-preset-es2015": "6.6.0",
     "babel-preset-react": "6.5.0",
+    "babelify": "7.2.0",
+    "classnames": "2.2.3",
     "d3": "^3.5.5",
     "moment": "^2.10.3",
-    "moment-timezone": "^0.3.0",
-    "react-classset": "0.0.2",
-    "jquery": "^2.1.3",
-    "react-mixin": "3.0.4",
-    "reflux": "0.4.0"
+    "moment-timezone": "^0.3.0"
   },
   "devDependencies": {
+    "ava": "0.13.0",
     "babel-eslint": "5.0.0",
     "babel-register": "6.7.2",
+    "coveralls": "2.11.8",
+    "enzyme": "2.1.0",
     "eslint": "2.2.0",
     "eslint-plugin-react": "4.2.2",
+    "nyc": "6.1.1",
     "react": "^0.13.3"
   },
   "peerDependencies": {
@@ -51,7 +52,11 @@
     "react": "^0.13.3"
   },
   "scripts": {
-    "eslint": "eslint --ext .js --ext .jsx ./src/** ./test/**"
+    "eslint": "eslint --ext .js --ext .jsx ./src/** ./test/**",
+    "test": "ava",
+    "test-cover": "nyc ava",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "cover-report": "nyc report --reporter=lcov && open coverage/lcov-report/index.html"
   },
   "browserify": {
     "transform": [
