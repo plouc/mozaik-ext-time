@@ -1,5 +1,6 @@
 # Mozaïk time widgets
 
+[![License][license-image]][license-url]
 [![Travis CI][travis-image]][travis-url]
 [![NPM version][npm-image]][npm-url]
 [![Dependencies][gemnasium-image]][gemnasium-url]
@@ -45,6 +46,8 @@ key        | required | description
 }
 ```
 
+[license-image]: https://img.shields.io/github/license/plouc/mozaik-ext-time.svg?style=flat-square
+[license-url]: https://github.com/plouc/mozaik-ext-time/blob/master/LICENSE.md
 [travis-image]: https://img.shields.io/travis/plouc/mozaik-ext-time.svg?style=flat-square
 [travis-url]: https://travis-ci.org/plouc/mozaik-ext-time
 [npm-image]: https://img.shields.io/npm/v/mozaik-ext-time.svg?style=flat-square
