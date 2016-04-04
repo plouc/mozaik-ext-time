@@ -28,15 +28,12 @@ class Clock extends Component {
     constructor(props) {
         super(props);
 
-        const { timezone } = this.props;
         this.state = getCurrentTimeParts(this.props.timezone);
     }
 
     componentDidMount() {
-        const { timezone } = this.props;
-
         setInterval(() => {
-            this.setState(getCurrentTimeParts(timezone));
+            this.setState(getCurrentTimeParts(this.props.timezone));
         }, 1000);
     }
 
