@@ -1,6 +1,6 @@
-import Clock from './Clock.jsx';
+import Clock from './Clock'
 
 
 export default {
-    Clock
-};
+    Clock,
+}
