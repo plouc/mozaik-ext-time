@@ -5,7 +5,7 @@ import moment                          from 'moment'
 import timezone                        from 'moment-timezone'
 
 
-const getCurrentTimeParts = function (timezoneName) {
+const getCurrentTimeParts = timezoneName => {
     let currentTime = timezoneName ? moment().tz(timezoneName) : moment()
 
     return {
