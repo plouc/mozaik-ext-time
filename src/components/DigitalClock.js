@@ -25,7 +25,7 @@ class DigitalClock extends Component {
     constructor(props) {
         super(props)
 
-        this.state = getCurrentTimeParts(this.props.timezone)
+        this.state = getCurrentTimeParts(props.timezone)
     }
 
     componentDidMount() {
@@ -68,6 +68,7 @@ class DigitalClock extends Component {
 DigitalClock.propTypes = {
     displayWeekday: PropTypes.bool.isRequired,
     displaySeconds: PropTypes.bool.isRequired,
+    timezone:       PropTypes.oneOf(moment.tz.names()),
 }
 
 DigitalClock.defaultProps = {
