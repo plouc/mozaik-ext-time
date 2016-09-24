@@ -2,7 +2,7 @@ import test        from 'ava'
 import React       from 'react'
 import { shallow } from 'enzyme'
 import moment      from 'moment'
-import Clock       from '../src/components/Clock'
+import Clock       from '../../src/components/Clock'
 
 
 const getSampleTimeParts = (timeString) => {
@@ -12,7 +12,7 @@ const getSampleTimeParts = (timeString) => {
         moment:  time,
         hours:   time.hours() + time.minutes() / 60,
         minutes: time.minutes(),
-        seconds: time.seconds()
+        seconds: time.seconds(),
     }
 }
 
