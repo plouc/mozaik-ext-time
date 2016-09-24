@@ -25,25 +25,28 @@ key        | required | description
 
 ### usage
 
-```javascript
-{
-  type: 'time.clock',
-  info: 'date',
-  columns: 1, rows: 1, x: 0, y: 0
-},
-{
-  type: 'time.clock',
-  timezone: 'America/Los_Angeles',
-  info: 'timezone',
-  sunRise: '6:30',
-  sunSet: '17:43',
-  columns: 1, rows: 1, x: 1, y: 0
-},
-{
-  type: 'time.clock',
-  info: 'Time is money!',
-  columns: 1, rows: 1, x: 2, y: 0
-}
+``` yaml
+- type:       time.clock
+  info:       date
+  columns:    1
+  rows:       1
+  x:          0
+  y:          0
+  
+- type:       time.clock
+  info:       timezone
+  timezone:   America/Los_Angeles
+  columns:    1
+  rows:       1
+  x:          1
+  y:          0
+  
+- type:       time.clock
+  info:       Time is money!
+  columns:    1
+  rows:       1
+  x:          2
+  y:          0
 ```
 
 [license-image]: https://img.shields.io/github/license/plouc/mozaik-ext-time.svg?style=flat-square

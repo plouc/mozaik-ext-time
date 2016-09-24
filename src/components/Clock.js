@@ -113,7 +113,7 @@ class Clock extends Component {
 Clock.propTypes = {
     title:    PropTypes.string,
     info:     PropTypes.string,
-    timezone: PropTypes.string,
+    timezone: PropTypes.oneOf(moment.tz.names()),
     sunRise:  PropTypes.string.isRequired,
     sunSet:   PropTypes.string.isRequired,
 }
