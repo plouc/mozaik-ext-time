@@ -49,6 +49,44 @@ key        | required | description
   y:          0
 ```
 
+
+## Time — DigitalClock
+
+> Show digital clock from local or another timezone.
+
+### parameters
+
+key              | required | default | description
+-----------------|----------|---------|------------------------------------------
+`displayWeekday` | no       | `true`  | *Enable/disable day of week display.*
+`displaySeconds` | no       | `true`  | *Enable/disable seconds display.*
+`timezone`       | no       |         | *Name of the timezone, like `America/Los_Angeles`. See http://momentjs.com/timezone/ for possible values. Defaults to local time.*
+
+### usage
+
+``` yaml
+- type:           time.digital_clock
+  columns:        1
+  rows:           1
+  x:              0
+  y:              0
+
+- type:           time.digital_clock
+  displaySeconds: false
+  columns:        1
+  rows:           1
+  x:              1
+  y:              0
+
+- type:           time.digital_clock
+  displayWeekday: false
+  columns:        1
+  rows:           1
+  x:              2
+  y:              0
+```
+
+
 [license-image]: https://img.shields.io/github/license/plouc/mozaik-ext-time.svg?style=flat-square
 [license-url]: https://github.com/plouc/mozaik-ext-time/blob/master/LICENSE.md
 [travis-image]: https://img.shields.io/travis/plouc/mozaik-ext-time.svg?style=flat-square

@@ -10,55 +10,11 @@ $digital-clock-bg-color           = default('$digital-clock-bg-color', $widget-b
 $digital-clock-digit-color        = default('$digital-clock-digit-color', $main-txt-color)
 
 
-.digital-clock {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
-  background: $digital-clock-bg-color;
-  height: 100%;
-  width:  100%;
-  padding: 2vmin;
-  border-radius: $widget-border-radius;
-}
-
 // —————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Day of week indicator
 // —————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-.digital-clock__day-of-week {
-  display: flex;
-  justify-content: space-between;
-  text-transform: uppercase;
-  color: $digital-clock-digit-color;
-  margin-bottom: 2.4vmin;
-}
-.digital-clock__day-of-week__item {
-  opacity: .35;
-  border-bottom: 1px solid transparent;
-}
 .digital-clock__day-of-week__item--current {
-  opacity: 1;
   border-bottom-color: $digital-clock-digit-color;
-}
-
-// —————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Main time wrapper
-// —————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-.digital-clock__time {
-  display: flex;
-  justify-content: center;
-  flex-wrap: nowrap;
-  align-items: flex-end;
-}
-
-// —————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-// Container for hours/minutes/seconds
-// —————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-.digital-clock__pair {
-  display: flex;
-}
-.digital-clock__pair--seconds {
-  margin-left: 1.4vmin;
 }
 
 // —————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -88,18 +44,6 @@ $digital-clock-digit-color        = default('$digital-clock-digit-color', $main-
 // —————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 // Single digit
 // —————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-.digital-clock__digit {
-  position: relative;
-  width:  5vmin;
-  height: 8vmin;
-}
-.digital-clock__digit:first-child {
-  margin-right: 1vmin;
-}
-.digital-clock__digit--seconds {
-  width:  3vmin;
-  height: 5vmin;
-}
 .digital-clock__digit__part {
   position: absolute;
   display: block;
@@ -126,10 +70,6 @@ $digital-clock-digit-color        = default('$digital-clock-digit-color', $main-
 //  ....
 //
 .digital-clock__digit__part--top {
-  top: 0;
-  left: $digital-clock-digit-part-stroke + $digital-clock-digit-part-spacing;
-  height: $digital-clock-digit-part-stroke;
-  width: "calc(100% - %s)" % ($digital-clock-digit-part-stroke * 2 + $digital-clock-digit-part-spacing * 2);
 }
 .digital-clock__digit__part--top:before {
   border-width: $digital-clock-ending-small $digital-clock-digit-part-stroke $digital-clock-ending-large 0;
@@ -149,10 +89,6 @@ $digital-clock-digit-color        = default('$digital-clock-digit-color', $main-
 //  ....
 //
 .digital-clock__digit__part--middle {
-  top: "calc(50% - %s)" % ($digital-clock-digit-part-stroke * 0.5);
-  left: $digital-clock-digit-part-stroke + $digital-clock-digit-part-spacing;
-  height: $digital-clock-digit-part-stroke;
-  width: "calc(100% - %s)" % ($digital-clock-digit-part-stroke * 2 + $digital-clock-digit-part-spacing * 2);
 }
 .digital-clock__digit__part--middle:before {
   border-width: ($digital-clock-digit-part-stroke / 2);
@@ -172,10 +108,6 @@ $digital-clock-digit-color        = default('$digital-clock-digit-color', $main-
 //  ————
 //
 .digital-clock__digit__part--bottom {
-  bottom: 0;
-  left: $digital-clock-digit-part-stroke + $digital-clock-digit-part-spacing;
-  height: $digital-clock-digit-part-stroke;
-  width: "calc(100% - %s)" % ($digital-clock-digit-part-stroke * 2 + $digital-clock-digit-part-spacing * 2);
 }
 .digital-clock__digit__part--bottom:before {
   border-width $digital-clock-ending-large $digital-clock-digit-part-stroke $digital-clock-ending-small 0

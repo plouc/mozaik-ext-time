@@ -1,35 +1,34 @@
-import React, { Component, PropTypes } from 'react'
-import classNames                      from 'classnames'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
+const Container = styled.div`
+    display: flex;
+    justify-content: space-between;
+    text-transform: uppercase;
+    //color: $digital-clock-digit-color;
+    margin-bottom: 2.4vmin;
+`
 
-const DAYS_OF_WEEK = [
-    'sun',
-    'mon',
-    'tue',
-    'wed',
-    'thu',
-    'fri',
-    'sat',
-]
+const Item = styled.span`
+    opacity: ${props => (props.isCurrent ? 1 : 0.35)};
+    border-bottom: 1px solid transparent;
+`
 
+const DAYS_OF_WEEK = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']
 
 class DigitalClockDayOfWeek extends Component {
     render() {
         const { day } = this.props
 
         return (
-            <div className="digital-clock__day-of-week">
-                {DAYS_OF_WEEK.map((dayOfWeek, i) => (
-                    <span
-                        key={dayOfWeek}
-                        className={classNames('digital-clock__day-of-week__item', {
-                            'digital-clock__day-of-week__item--current': day === i
-                        })}
-                    >
+            <Container>
+                {DAYS_OF_WEEK.map((dayOfWeek, i) =>
+                    <Item key={dayOfWeek} isCurrent={day === i}>
                         {dayOfWeek}
-                    </span>
-                ))}
-            </div>
+                    </Item>
+                )}
+            </Container>
         )
     }
 }
@@ -37,6 +36,5 @@ class DigitalClockDayOfWeek extends Component {
 DigitalClockDayOfWeek.propTypes = {
     day: PropTypes.number.isRequired,
 }
-
 
 export default DigitalClockDayOfWeek

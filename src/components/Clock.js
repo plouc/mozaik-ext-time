@@ -1,28 +1,32 @@
-import React, { Component, PropTypes } from 'react'
-import classNames                      from 'classnames'
-import d3                              from 'd3/d3'
-import moment                          from 'moment'
-import timezone                        from 'moment-timezone'
-
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import d3 from 'd3/d3'
+import moment from 'moment'
+import 'moment-timezone'
 
 const getCurrentTimeParts = timezoneName => {
     let currentTime = timezoneName ? moment().tz(timezoneName) : moment()
 
     return {
-        moment:  currentTime,
-        hours:   currentTime.hours() + currentTime.minutes() / 60,
+        moment: currentTime,
+        hours: currentTime.hours() + currentTime.minutes() / 60,
         minutes: currentTime.minutes(),
-        seconds: currentTime.seconds()
+        seconds: currentTime.seconds(),
     }
 }
 
-
-const secondsScale = d3.scale.linear().domain([0, 59 + 999/1000]).range([-90, 270])
-const minutesScale = d3.scale.linear().domain([0, 59 + 59/60]).range([-90, 270])
-const hoursScale   = d3.scale.linear().domain([0, 11 + 59/60]).range([-90, 270])
+const secondsScale = d3.scale
+    .linear()
+    .domain([0, 59 + 999 / 1000])
+    .range([-90, 270])
+const minutesScale = d3.scale
+    .linear()
+    .domain([0, 59 + 59 / 60])
+    .range([-90, 270])
+const hoursScale = d3.scale.linear().domain([0, 11 + 59 / 60]).range([-90, 270])
 
 const sunFormats = ['HH:mm', 'H:mm', 'H:m']
-
 
 class Clock extends Component {
     constructor(props) {
@@ -40,36 +44,44 @@ class Clock extends Component {
     render() {
         const { hours, minutes, seconds } = this.state
 
-        let hoursStyle   = {
-            transform: `rotate(${ hoursScale(hours % 12) }deg)`
+        let hoursStyle = {
+            transform: `rotate(${hoursScale(hours % 12)}deg)`,
         }
         let minutesStyle = {
-            transform: `rotate(${ minutesScale(minutes) }deg)`
+            transform: `rotate(${minutesScale(minutes)}deg)`,
         }
         let secondsStyle = {
-            transform: `rotate(${ secondsScale(seconds) }deg)`
+            transform: `rotate(${secondsScale(seconds)}deg)`,
         }
 
         // Day/night indicator
         const { sunRise, sunSet } = this.props
 
         const sunRiseTime = moment(sunRise, sunFormats)
-        const sunSetTime  = moment(sunSet,  sunFormats)
+        const sunSetTime = moment(sunSet, sunFormats)
 
-        const sunRiseDate = this.state.moment.clone().hours(sunRiseTime.hours()).minutes(sunRiseTime.minutes())
-        const sunSetDate  = this.state.moment.clone().hours(sunSetTime.hours()).minutes(sunSetTime.minutes())
+        const sunRiseDate = this.state.moment
+            .clone()
+            .hours(sunRiseTime.hours())
+            .minutes(sunRiseTime.minutes())
+        const sunSetDate = this.state.moment
+            .clone()
+            .hours(sunSetTime.hours())
+            .minutes(sunSetTime.minutes())
 
         const isDay = this.state.moment.isBetween(sunRiseDate, sunSetDate)
         const timeIndicatorClasses = classNames('time__clock__indicator fa', {
-            'fa-sun-o':  isDay,
-            'fa-moon-o': !isDay
+            'fa-sun-o': isDay,
+            'fa-moon-o': !isDay,
         })
 
         // Textual field, defaults to config value
         const infoFields = {
-            timezone: this.props.timezone ? this.props.timezone.replace(/\w+\//, '').replace('_', ' ') : this.props.timezone,
-            date:     this.state.moment.format('ll'),
-            time:     this.state.moment.format('LT')
+            timezone: this.props.timezone
+                ? this.props.timezone.replace(/\w+\//, '').replace('_', ' ')
+                : this.props.timezone,
+            date: this.state.moment.format('ll'),
+            time: this.state.moment.format('LT'),
         }
         const info = infoFields[this.props.info] || this.props.info
 
@@ -79,13 +91,22 @@ class Clock extends Component {
         const body = (
             <div className={bodyClasses}>
                 <div className="time__clock__outer-circle" />
-                <span className={timeIndicatorClasses}></span>
+                <span className={timeIndicatorClasses} />
                 <span className="time__clock__info">
                     {info}
                 </span>
-                <div className="time__clock__hand time__clock__hand--seconds" style={secondsStyle} />
-                <div className="time__clock__hand time__clock__hand--minutes" style={minutesStyle} />
-                <div className="time__clock__hand time__clock__hand--hours"   style={hoursStyle} />
+                <div
+                    className="time__clock__hand time__clock__hand--seconds"
+                    style={secondsStyle}
+                />
+                <div
+                    className="time__clock__hand time__clock__hand--minutes"
+                    style={minutesStyle}
+                />
+                <div
+                    className="time__clock__hand time__clock__hand--hours"
+                    style={hoursStyle}
+                />
                 <div className="time__clock__inner-circle" />
             </div>
         )
@@ -111,17 +132,16 @@ class Clock extends Component {
 }
 
 Clock.propTypes = {
-    title:    PropTypes.string,
-    info:     PropTypes.string,
+    title: PropTypes.string,
+    info: PropTypes.string,
     timezone: PropTypes.oneOf(moment.tz.names()),
-    sunRise:  PropTypes.string.isRequired,
-    sunSet:   PropTypes.string.isRequired,
+    sunRise: PropTypes.string.isRequired,
+    sunSet: PropTypes.string.isRequired,
 }
 
 Clock.defaultProps = {
     sunRise: '06:00',
-    sunSet:  '18:00'
+    sunSet: '18:00',
 }
-
 
 export default Clock
