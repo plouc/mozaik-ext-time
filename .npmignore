@@ -1,9 +1,20 @@
-test
-preview
-.travis.yml
+/preview
+
+.babelrc
 .eslintrc
+.gitignore
+.npmignore
+.travis.yml
+
 npm-debug.log*
-.nyc_output
-coverage
-.DS_Store
+
+# Tests
+/test
+/.nyc_output
+/coverage
+
+# GitHub
 ISSUE_TEMPLATE.md
+
+# OSX
+.DS_Store

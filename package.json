@@ -13,6 +13,8 @@
   },
   "homepage": "https://github.com/plouc/mozaik-ext-time",
   "main": "./lib/components/index.js",
+  "module": "es/components/index.js",
+  "jsnext:main": "es/components/index.js",
   "keywords": [
     "time",
     "mozaik",
@@ -32,46 +34,40 @@
     "moment": "2.14.1",
     "moment-timezone": "0.5.5",
     "prop-types": "^15.5.10",
+    "react-icons": "^2.2.5",
     "react-measure": "^2.0.2",
     "styled-components": "^2.1.1"
   },
   "devDependencies": {
     "@mozaik/babel-preset": "^1.0.0-alpha.1",
     "@mozaik/ui": "^2.0.0-alpha.7",
-    "ava": "0.16.0",
     "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
     "coveralls": "2.11.12",
     "cross-env": "^5.0.1",
     "enzyme": "2.4.1",
-    "eslint": "3.3.1",
-    "eslint-plugin-react": "6.1.2",
-    "mockery": "1.7.0",
+    "eslint": "^4.2.0",
+    "eslint-plugin-react": "^7.1.0",
+    "jest": "^20.0.4",
     "nyc": "8.1.0",
     "prettier": "^1.5.3",
     "react": "^15.6.1",
     "react-addons-test-utils": "^15.6.0",
-    "react-dom": "^15.6.1",
-    "sinon": "1.17.5"
+    "react-dom": "^15.6.1"
   },
   "peerDependencies": {
     "@mozaik/ui": "^2.0.0-alpha.1",
     "react": "^15.6.1"
   },
   "scripts": {
-    "eslint": "eslint ./src/** ./test/**",
-    "test": "ava --verbose",
-    "test-cover": "nyc ava --verbose",
+    "lint": "eslint ./src/** ./test/**",
+    "test": "jest",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "cover-report": "nyc report --reporter=lcov && open coverage/lcov-report/index.html",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
     "build": "npm run build:commonjs && npm run build:es",
     "format": "prettier --tab-width=4 --bracket-spacing --no-semi --trailing-comma es5 --single-quote --write 'src/**/*.js'"
-  },
-  "ava": {
-    "babel": "inherit",
-    "require": [
-      "babel-register"
-    ]
   }
 }

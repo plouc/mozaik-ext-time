@@ -4,6 +4,61 @@ import classNames from 'classnames'
 import d3 from 'd3/d3'
 import moment from 'moment'
 import 'moment-timezone'
+import styled, { withTheme } from 'styled-components'
+import { Widget, WidgetHeader, WidgetBody } from '@mozaik/ui'
+
+const OuterCircle = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: ${props => props.theme.root.background};
+    border: .5vmin solid ${props => props.theme.root.color};
+    width: ${props => props.radius * 2}px;
+    height: ${props => props.radius * 2}px;
+    border-radius: ${props => props.radius}px;
+    margin-top: ${props => props.radius * -1}px;
+    margin-left: ${props => props.radius * -1}px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .2), 0 3px 5px rgba(0, 0, 0, .2) inset;
+`
+
+const InnerCircle = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: ${props => props.theme.root.color};
+    width: ${props => props.radius * 2}px;
+    height: ${props => props.radius * 2}px;
+    border-radius: ${props => props.radius}px;
+    margin-top: ${props => props.radius * -1}px;
+    margin-left: ${props => props.radius * -1}px;
+`
+
+const Hand = styled.div`
+    width: ${props => props.radius * 0.87}px;
+    height: 2px;
+    margin-top: -1px;
+    background-color: ${props => props.theme.root.color};
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: left center;
+`
+
+const HoursHand = Hand.extend`width: ${props => props.radius * 0.55}px;`
+
+const MinutesHand = Hand.extend``
+
+const SecondsHand = Hand.extend`height: 1px;`
+
+const Info = styled.span`
+    display: block;
+    position: relative;
+    top: 55%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 2vmin;
+`
 
 const getCurrentTimeParts = timezoneName => {
     let currentTime = timezoneName ? moment().tz(timezoneName) : moment()
@@ -29,6 +84,19 @@ const hoursScale = d3.scale.linear().domain([0, 11 + 59 / 60]).range([-90, 270])
 const sunFormats = ['HH:mm', 'H:mm', 'H:m']
 
 class Clock extends Component {
+    static propTypes = {
+        title: PropTypes.string,
+        info: PropTypes.string,
+        timezone: PropTypes.oneOf(moment.tz.names()),
+        sunRise: PropTypes.string.isRequired,
+        sunSet: PropTypes.string.isRequired,
+    }
+
+    static defaultProps = {
+        sunRise: '06:00',
+        sunSet: '18:00',
+    }
+
     constructor(props) {
         super(props)
 
@@ -43,16 +111,6 @@ class Clock extends Component {
 
     render() {
         const { hours, minutes, seconds } = this.state
-
-        let hoursStyle = {
-            transform: `rotate(${hoursScale(hours % 12)}deg)`,
-        }
-        let minutesStyle = {
-            transform: `rotate(${minutesScale(minutes)}deg)`,
-        }
-        let secondsStyle = {
-            transform: `rotate(${secondsScale(seconds)}deg)`,
-        }
 
         // Day/night indicator
         const { sunRise, sunSet } = this.props
@@ -87,61 +145,56 @@ class Clock extends Component {
 
         let { title } = this.props
 
-        const bodyClasses = title ? 'widget__body' : ''
         const body = (
-            <div className={bodyClasses}>
-                <div className="time__clock__outer-circle" />
+            <div>
+                <OuterCircle radius={100} />
                 <span className={timeIndicatorClasses} />
-                <span className="time__clock__info">
+                <Info>
                     {info}
-                </span>
-                <div
-                    className="time__clock__hand time__clock__hand--seconds"
-                    style={secondsStyle}
+                </Info>
+                <SecondsHand
+                    radius={100}
+                    style={{
+                        transform: `rotate(${secondsScale(seconds)}deg)`,
+                    }}
                 />
-                <div
-                    className="time__clock__hand time__clock__hand--minutes"
-                    style={minutesStyle}
+                <MinutesHand
+                    radius={100}
+                    style={{
+                        transform: `rotate(${minutesScale(minutes)}deg)`,
+                    }}
                 />
-                <div
-                    className="time__clock__hand time__clock__hand--hours"
-                    style={hoursStyle}
+                <HoursHand
+                    radius={100}
+                    style={{
+                        transform: `rotate(${hoursScale(hours % 12)}deg)`,
+                    }}
                 />
-                <div className="time__clock__inner-circle" />
+                <InnerCircle radius={5} />
             </div>
         )
 
-        if (title) {
-            if (title.indexOf('::') === 0) {
-                title = this.state.moment.format(title.substring(2))
-            }
-
+        if (!title) {
             return (
-                <div>
-                    <div className="widget__header">
-                        {title}
-                        <i className="fa fa-clock-o" />
-                    </div>
+                <Widget>
                     {body}
-                </div>
+                </Widget>
             )
-        } else {
-            return body
         }
+
+        if (title.indexOf('::') === 0) {
+            title = this.state.moment.format(title.substring(2))
+        }
+
+        return (
+            <Widget>
+                <WidgetHeader title={title} />
+                <WidgetBody>
+                    {body}
+                </WidgetBody>
+            </Widget>
+        )
     }
 }
 
-Clock.propTypes = {
-    title: PropTypes.string,
-    info: PropTypes.string,
-    timezone: PropTypes.oneOf(moment.tz.names()),
-    sunRise: PropTypes.string.isRequired,
-    sunSet: PropTypes.string.isRequired,
-}
-
-Clock.defaultProps = {
-    sunRise: '06:00',
-    sunSet: '18:00',
-}
-
-export default Clock
+export default withTheme(Clock)
