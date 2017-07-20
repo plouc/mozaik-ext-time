@@ -1,6 +1,6 @@
 {
   "name": "@mozaik/ext-time",
-  "version": "2.0.0-alpha.0",
+  "version": "2.0.0-alpha.1",
   "description": "Mozaik time widgets",
   "repository": {
     "type": "git",
@@ -40,7 +40,7 @@
     "styled-components": "^2.1.1"
   },
   "devDependencies": {
-    "@mozaik/babel-preset": "^1.0.0-alpha.1",
+    "@mozaik/babel-preset": "^1.0.0-alpha.6",
     "@mozaik/ui": "^2.0.0-alpha.7",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",

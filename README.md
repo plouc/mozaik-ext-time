@@ -97,4 +97,4 @@ key              | required | default | description
 [gemnasium-url]: https://gemnasium.com/plouc/mozaik-ext-time
 [coverage-image]: https://img.shields.io/coveralls/plouc/mozaik-ext-time.svg?style=flat-square
 [coverage-url]: https://coveralls.io/github/plouc/mozaik-ext-time
-[widget-count-image]: https://img.shields.io/badge/widgets-x1-green.svg?style=flat-square
+[widget-count-image]: https://img.shields.io/badge/widgets-x2-green.svg?style=flat-square
