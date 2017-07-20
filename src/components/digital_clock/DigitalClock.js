@@ -6,7 +6,7 @@ import styled, { withTheme } from 'styled-components'
 import Measure from 'react-measure'
 import { Widget } from '@mozaik/ui'
 import DigitalClockDayOfWeek from './DigitalClockDayOfWeek'
-import DigitalClockDigit from './DigitalClockDigit'
+import DigitalChar from './DigitalChar'
 import DigitalClockHoursMinutesSeparator from './DigitalClockHoursMinutesSeparator'
 
 const RATIO = 0.22
@@ -106,11 +106,11 @@ class DigitalClock extends Component {
 
         const digitWidth = width * 0.14 // * 4 => .56
         const digitSpacing = width * 0.034 // * 4 => .16
-        const digitStroke = digitWidth * 0.13
+        const digitStroke = digitWidth * 0.12
 
         const secondDigitWidth = width * 0.1 // * 2 => .20
         const secondDigitSpacing = width * 0.02 // * 1 => .02
-        const secondDigitStroke = secondDigitWidth * 0.15
+        const secondDigitStroke = secondDigitWidth * 0.14
 
         let hoursX = 0
         if (!displaySeconds) {
@@ -149,16 +149,16 @@ class DigitalClock extends Component {
                             >
                                 {shouldRender &&
                                     <svg width={width} height={height}>
-                                        <DigitalClockDigit
-                                            number={parts[0]}
+                                        <DigitalChar
+                                            char={`${parts[0]}`}
                                             width={digitWidth}
                                             height={height}
                                             x={hoursX}
                                             stroke={digitStroke}
                                             color={color}
                                         />
-                                        <DigitalClockDigit
-                                            number={parts[1]}
+                                        <DigitalChar
+                                            char={`${parts[1]}`}
                                             width={digitWidth}
                                             height={height}
                                             x={
@@ -175,16 +175,16 @@ class DigitalClock extends Component {
                                             x={separatorX}
                                             color={color}
                                         />
-                                        <DigitalClockDigit
-                                            number={parts[2]}
+                                        <DigitalChar
+                                            char={`${parts[2]}`}
                                             width={digitWidth}
                                             height={height}
                                             x={minutesX}
                                             stroke={digitStroke}
                                             color={color}
                                         />
-                                        <DigitalClockDigit
-                                            number={parts[3]}
+                                        <DigitalChar
+                                            char={`${parts[3]}`}
                                             width={digitWidth}
                                             height={height}
                                             x={
@@ -196,8 +196,8 @@ class DigitalClock extends Component {
                                             color={color}
                                         />
                                         {displaySeconds &&
-                                            <DigitalClockDigit
-                                                number={parts[4]}
+                                            <DigitalChar
+                                                char={`${parts[4]}`}
                                                 width={secondDigitWidth}
                                                 height={height * 0.66}
                                                 x={secondsX}
@@ -206,8 +206,8 @@ class DigitalClock extends Component {
                                                 color={color}
                                             />}
                                         {displaySeconds &&
-                                            <DigitalClockDigit
-                                                number={parts[5]}
+                                            <DigitalChar
+                                                char={`${parts[5]}`}
                                                 width={secondDigitWidth}
                                                 height={height * 0.66}
                                                 x={

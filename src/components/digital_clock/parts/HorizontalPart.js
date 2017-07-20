@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Part from './Part'
 
 const HorizontalPart = ({ width: _width, stroke, spacing, ...props }) => {
-    const width = _width - stroke - spacing
+    const width = (_width - stroke - spacing) / 2 - spacing / 2
 
     const pathInstructions = `
         M ${0} ${stroke / 2}

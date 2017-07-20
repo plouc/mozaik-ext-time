@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import d3 from 'd3/d3'
 import moment from 'moment'
 import 'moment-timezone'
-import styled, { withTheme } from 'styled-components'
+import styled from 'styled-components'
 import { Widget, WidgetHeader, WidgetBody } from '@mozaik/ui'
 
 const OuterCircle = styled.div`
@@ -44,13 +44,13 @@ const Hand = styled.div`
     transform-origin: left center;
 `
 
-const HoursHand = Hand.extend`width: ${props => props.radius * 0.55}px;`
+export const HoursHand = Hand.extend`width: ${props => props.radius * 0.55}px;`
 
-const MinutesHand = Hand.extend``
+export const MinutesHand = Hand.extend``
 
-const SecondsHand = Hand.extend`height: 1px;`
+export const SecondsHand = Hand.extend`height: 1px;`
 
-const Info = styled.span`
+export const Info = styled.span`
     display: block;
     position: relative;
     top: 55%;
@@ -83,7 +83,7 @@ const hoursScale = d3.scale.linear().domain([0, 11 + 59 / 60]).range([-90, 270])
 
 const sunFormats = ['HH:mm', 'H:mm', 'H:m']
 
-class Clock extends Component {
+export default class Clock extends Component {
     static propTypes = {
         title: PropTypes.string,
         info: PropTypes.string,
@@ -196,5 +196,3 @@ class Clock extends Component {
         )
     }
 }
-
-export default withTheme(Clock)
