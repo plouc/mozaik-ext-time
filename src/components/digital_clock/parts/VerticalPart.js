@@ -1,6 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import Part from './Part'
+import Part, { partPropTypes } from './Part'
 
 const VerticalPart = ({ height: _height, stroke, spacing, ...props }) => {
     const height = _height / 2 - stroke / 2 - spacing
@@ -18,10 +17,6 @@ const VerticalPart = ({ height: _height, stroke, spacing, ...props }) => {
     return <Part d={pathInstructions} {...props} />
 }
 
-VerticalPart.propTypes = {
-    height: PropTypes.number.isRequired,
-    stroke: PropTypes.number.isRequired,
-    spacing: PropTypes.number.isRequired,
-}
+VerticalPart.propTypes = partPropTypes
 
 export default VerticalPart

@@ -2,45 +2,33 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import 'moment-timezone'
-import styled, { withTheme } from 'styled-components'
+import styled from 'styled-components'
 import Measure from 'react-measure'
 import { Widget } from '@mozaik/ui'
-import DigitalClockDayOfWeek from './DigitalClockDayOfWeek'
-import DigitalChar from './DigitalChar'
-import DigitalClockHoursMinutesSeparator from './DigitalClockHoursMinutesSeparator'
-
-const RATIO = 0.22
+import DigitalClockDate from './DigitalClockDate'
+import DigitalClockTime from './DigitalClockTime'
 
 const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: center;
-    height: 100%;
+    padding: 3vmin;
     width: 100%;
-    padding: 4vmin;
+    height: 100%;
 `
 
-/**
- * @param {string|undefined} timezoneName - The timezone you wish to use
- * @returns {{ now: moment, parts: Array<number> }} The resulting object
- */
-const getCurrentTimeParts = timezoneName => {
-    const currentTime = timezoneName
-        ? moment().tz(timezoneName)
-        : moment().tz('Asia/Tokyo')
-
-    const formatted = currentTime.format('hhmmss')
-
-    return {
-        now: currentTime,
-        parts: formatted.split('').map(part => parseInt(part, 10)),
-    }
+const innerContainerStyle = {
+    width: '100%',
+    height: '100%',
+    flex: 1,
+    flexDirection: 'column',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
 }
 
-class DigitalClock extends Component {
+const getDate = timezone => (timezone ? moment().tz(timezone) : moment())
+
+export default class DigitalClock extends Component {
     static propTypes = {
-        displayWeekday: PropTypes.bool.isRequired,
+        displayDate: PropTypes.bool.isRequired,
         displaySeconds: PropTypes.bool.isRequired,
         timezone: PropTypes.oneOf(moment.tz.names()),
         color: PropTypes.string,
@@ -48,7 +36,7 @@ class DigitalClock extends Component {
     }
 
     static defaultProps = {
-        displayWeekday: true,
+        displayDate: true,
         displaySeconds: true,
     }
 
@@ -63,7 +51,7 @@ class DigitalClock extends Component {
         super(props)
 
         this.state = {
-            ...getCurrentTimeParts(props.timezone),
+            date: getDate(props.timezone),
             dimensions: {
                 width: -1,
                 height: -1,
@@ -73,153 +61,42 @@ class DigitalClock extends Component {
 
     componentDidMount() {
         setInterval(() => {
-            this.setState(getCurrentTimeParts(this.props.timezone))
+            this.setState({ date: getDate(this.props.timezone) })
         }, 1000)
     }
 
     render() {
-        const {
-            displayWeekday,
-            displaySeconds,
-            color: _color,
-            theme,
-        } = this.props
-        const {
-            now,
-            parts,
-            dimensions: { width: _width, height: _height },
-        } = this.state
+        const { displayDate, displaySeconds, color: _color, theme } = this.props
+        const { date, dimensions: { width, height } } = this.state
 
         const color = _color || theme.root.color
 
-        const shouldRender = _width > 0 && _height > 0
-
-        let width = _width
-        let height = _height
-        const ratio = width / height
-        //console.log('ratio', ratio)
-        if (ratio > RATIO) {
-            height = width * RATIO
-        } else if (ratio < RATIO) {
-            width = height / RATIO
-        }
-
-        const digitWidth = width * 0.14 // * 4 => .56
-        const digitSpacing = width * 0.034 // * 4 => .16
-        const digitStroke = digitWidth * 0.12
-
-        const secondDigitWidth = width * 0.1 // * 2 => .20
-        const secondDigitSpacing = width * 0.02 // * 1 => .02
-        const secondDigitStroke = secondDigitWidth * 0.14
-
-        let hoursX = 0
-        if (!displaySeconds) {
-            hoursX =
-                (width - (digitWidth * 4 + digitStroke + digitSpacing * 4)) / 2
-        }
-        const separatorX = hoursX + (digitWidth + digitSpacing) * 2
-        const minutesX =
-            hoursX +
-            (digitWidth + digitSpacing) * 2 +
-            digitStroke +
-            digitSpacing
-
-        const secondsX = width - (secondDigitWidth * 2 + secondDigitSpacing)
-        const secondsY = height * 0.34
+        const shouldRender = width > 0 && height > 0
+        const shouldRenderDate = shouldRender && displayDate
 
         return (
             <Widget>
                 <Container>
-                    {displayWeekday &&
-                        <DigitalClockDayOfWeek day={now.day()} color={color} />}
                     <Measure
                         onResize={contentRect => {
                             this.setState({ dimensions: contentRect.entry })
                         }}
                     >
                         {({ measureRef }) =>
-                            <div
-                                ref={measureRef}
-                                style={{
-                                    flex: 1,
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                }}
-                            >
+                            <div ref={measureRef} style={innerContainerStyle}>
+                                {shouldRenderDate &&
+                                    <DigitalClockDate
+                                        date={date}
+                                        width={width}
+                                        color={color}
+                                    />}
                                 {shouldRender &&
-                                    <svg width={width} height={height}>
-                                        <DigitalChar
-                                            char={`${parts[0]}`}
-                                            width={digitWidth}
-                                            height={height}
-                                            x={hoursX}
-                                            stroke={digitStroke}
-                                            color={color}
-                                        />
-                                        <DigitalChar
-                                            char={`${parts[1]}`}
-                                            width={digitWidth}
-                                            height={height}
-                                            x={
-                                                hoursX +
-                                                digitWidth +
-                                                digitSpacing
-                                            }
-                                            stroke={digitStroke}
-                                            color={color}
-                                        />
-                                        <DigitalClockHoursMinutesSeparator
-                                            height={height}
-                                            stroke={digitStroke}
-                                            x={separatorX}
-                                            color={color}
-                                        />
-                                        <DigitalChar
-                                            char={`${parts[2]}`}
-                                            width={digitWidth}
-                                            height={height}
-                                            x={minutesX}
-                                            stroke={digitStroke}
-                                            color={color}
-                                        />
-                                        <DigitalChar
-                                            char={`${parts[3]}`}
-                                            width={digitWidth}
-                                            height={height}
-                                            x={
-                                                minutesX +
-                                                digitWidth +
-                                                digitSpacing
-                                            }
-                                            stroke={digitStroke}
-                                            color={color}
-                                        />
-                                        {displaySeconds &&
-                                            <DigitalChar
-                                                char={`${parts[4]}`}
-                                                width={secondDigitWidth}
-                                                height={height * 0.66}
-                                                x={secondsX}
-                                                y={secondsY}
-                                                stroke={secondDigitStroke}
-                                                color={color}
-                                            />}
-                                        {displaySeconds &&
-                                            <DigitalChar
-                                                char={`${parts[5]}`}
-                                                width={secondDigitWidth}
-                                                height={height * 0.66}
-                                                x={
-                                                    secondsX +
-                                                    secondDigitWidth +
-                                                    secondDigitSpacing
-                                                }
-                                                y={secondsY}
-                                                stroke={secondDigitStroke}
-                                                color={color}
-                                            />}
-                                    </svg>}
+                                    <DigitalClockTime
+                                        date={date}
+                                        displaySeconds={displaySeconds}
+                                        width={width}
+                                        color={color}
+                                    />}
                             </div>}
                     </Measure>
                 </Container>
@@ -227,5 +104,3 @@ class DigitalClock extends Component {
         )
     }
 }
-
-export default withTheme(DigitalClock)

@@ -8,11 +8,15 @@ export default {
         bottomLeft: 1,
         leftBottom: 1,
         leftTop: 1,
+        obliqueBottomLeft: 1,
+        obliqueTopRight: 1,
     },
     '1': {
-        topRight: 1,
-        rightTop: 1,
-        rightBottom: 1,
+        topLeft: 1,
+        centerTop: 1,
+        centerBottom: 1,
+        bottomLeft: 1,
+        bottomRight: 1,
     },
     '2': {
         topLeft: 1,
@@ -104,6 +108,7 @@ export default {
     B: {
         topLeft: 1,
         topRight: 1,
+        obliqueTopRight: 1,
         bottomLeft: 1,
         bottomRight: 1,
         leftBottom: 1,
@@ -122,6 +127,8 @@ export default {
     },
     D: {
         topLeft: 1,
+        topRight: 1,
+        rightTop: 1,
         rightBottom: 1,
         bottomRight: 1,
         bottomLeft: 1,
@@ -184,6 +191,7 @@ export default {
         centerLeft: 1,
         centerRight: 1,
         rightBottom: 1,
+        obliqueTopRight: 1,
     },
     L: {
         bottomLeft: 1,
@@ -205,6 +213,8 @@ export default {
         rightBottom: 1,
         leftBottom: 1,
         leftTop: 1,
+        obliqueTopLeft: 1,
+        obliqueBottomRight: 1,
     },
     O: {
         topLeft: 1,
@@ -234,6 +244,7 @@ export default {
         bottomLeft: 1,
         leftBottom: 1,
         leftTop: 1,
+        obliqueBottomRight: 1,
     },
     R: {
         topLeft: 1,
@@ -243,6 +254,7 @@ export default {
         leftTop: 1,
         centerLeft: 1,
         centerRight: 1,
+        obliqueBottomRight: 1,
     },
     S: {
         topRight: 1,
@@ -268,7 +280,12 @@ export default {
         leftBottom: 1,
         leftTop: 1,
     },
-    V: {},
+    V: {
+        leftTop: 1,
+        leftBottom: 1,
+        obliqueBottomLeft: 1,
+        obliqueTopRight: 1,
+    },
     W: {
         rightTop: 1,
         rightBottom: 1,
@@ -278,7 +295,12 @@ export default {
         leftTop: 1,
         centerBottom: 1,
     },
-    X: {},
+    X: {
+        obliqueTopLeft: 1,
+        obliqueTopRight: 1,
+        obliqueBottomRight: 1,
+        obliqueBottomLeft: 1,
+    },
     Y: {
         rightTop: 1,
         leftTop: 1,
@@ -286,7 +308,14 @@ export default {
         centerLeft: 1,
         centerRight: 1,
     },
-    Z: {},
+    Z: {
+        topLeft: 1,
+        topRight: 1,
+        obliqueTopRight: 1,
+        obliqueBottomLeft: 1,
+        bottomLeft: 1,
+        bottomRight: 1,
+    },
     '+': {
         centerTop: 1,
         centerRight: 1,
@@ -330,6 +359,14 @@ export default {
         centerTop: 1,
         centerBottom: 1,
         bottomLeft: 1,
+    },
+    '>': {
+        obliqueTopLeft: 1,
+        obliqueBottomLeft: 1,
+    },
+    '<': {
+        obliqueTopRight: 1,
+        obliqueBottomRight: 1,
     },
     ' ': {},
 }

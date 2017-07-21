@@ -1,31 +1,32 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 import d3 from 'd3/d3'
 import moment from 'moment'
 import 'moment-timezone'
 import styled from 'styled-components'
+import ClockIcon from 'react-icons/lib/fa/clock-o'
+import DayIcon from 'react-icons/lib/fa/sun-o'
+import NightIcon from 'react-icons/lib/fa/moon-o'
 import { Widget, WidgetHeader, WidgetBody } from '@mozaik/ui'
 
 const OuterCircle = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
-    background: ${props => props.theme.root.background};
-    border: .5vmin solid ${props => props.theme.root.color};
+    background: ${props => props.colors.background};
+    border: .5vmin solid ${props => props.colors.outline};
     width: ${props => props.radius * 2}px;
     height: ${props => props.radius * 2}px;
     border-radius: ${props => props.radius}px;
     margin-top: ${props => props.radius * -1}px;
     margin-left: ${props => props.radius * -1}px;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, .2), 0 3px 5px rgba(0, 0, 0, .2) inset;
 `
 
 const InnerCircle = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
-    background-color: ${props => props.theme.root.color};
+    background-color: ${props => props.colors.center};
     width: ${props => props.radius * 2}px;
     height: ${props => props.radius * 2}px;
     border-radius: ${props => props.radius}px;
@@ -37,27 +38,47 @@ const Hand = styled.div`
     width: ${props => props.radius * 0.87}px;
     height: 2px;
     margin-top: -1px;
-    background-color: ${props => props.theme.root.color};
     position: absolute;
     top: 50%;
     left: 50%;
     transform-origin: left center;
 `
 
-export const HoursHand = Hand.extend`width: ${props => props.radius * 0.55}px;`
+export const HoursHand = Hand.extend`
+    width: ${props => props.radius * 0.55}px;
+    background-color: ${props => props.colors.hoursHand};
+`
 
-export const MinutesHand = Hand.extend``
+export const MinutesHand = Hand.extend`
+    background-color: ${props => props.colors.minutesHand};
+`
 
-export const SecondsHand = Hand.extend`height: 1px;`
+export const SecondsHand = Hand.extend`
+    height: 1px;
+    background-color: ${props => props.colors.secondsHand};
+`
 
 export const Info = styled.span`
     display: block;
-    position: relative;
-    top: 55%;
+    position: absolute;
+    top: 60%;
     left: 0;
     width: 100%;
     text-align: center;
-    font-size: 2vmin;
+    font-size: 1.6vmin;
+    color: ${props => props.colors.info};
+`
+
+export const DayNightIndicator = styled.div`
+    display: flex;
+    position: absolute;
+    top: 20%;
+    left: 0;
+    width: 100%;
+    justify-content: center;
+    font-size: 3vmin;
+    opacity: 0.4;
+    color: ${props => props.colors.dayNightIcon};
 `
 
 const getCurrentTimeParts = timezoneName => {
@@ -90,6 +111,8 @@ export default class Clock extends Component {
         timezone: PropTypes.oneOf(moment.tz.names()),
         sunRise: PropTypes.string.isRequired,
         sunSet: PropTypes.string.isRequired,
+        colors: PropTypes.object,
+        theme: PropTypes.object.isRequired,
     }
 
     static defaultProps = {
@@ -112,8 +135,22 @@ export default class Clock extends Component {
     render() {
         const { hours, minutes, seconds } = this.state
 
-        // Day/night indicator
-        const { sunRise, sunSet } = this.props
+        const { sunRise, sunSet, colors: _colors, theme } = this.props
+
+        const colors = Object.assign(
+            {},
+            {
+                background: theme.root.background,
+                outline: theme.root.color,
+                center: theme.root.color,
+                hoursHand: theme.root.color,
+                minutesHand: theme.root.color,
+                secondsHand: theme.root.color,
+                dayNightIcon: theme.root.color,
+                info: theme.root.color,
+            },
+            _colors
+        )
 
         const sunRiseTime = moment(sunRise, sunFormats)
         const sunSetTime = moment(sunSet, sunFormats)
@@ -128,10 +165,7 @@ export default class Clock extends Component {
             .minutes(sunSetTime.minutes())
 
         const isDay = this.state.moment.isBetween(sunRiseDate, sunSetDate)
-        const timeIndicatorClasses = classNames('time__clock__indicator fa', {
-            'fa-sun-o': isDay,
-            'fa-moon-o': !isDay,
-        })
+        const dayNightIcon = isDay ? <DayIcon /> : <NightIcon />
 
         // Textual field, defaults to config value
         const infoFields = {
@@ -147,30 +181,35 @@ export default class Clock extends Component {
 
         const body = (
             <div>
-                <OuterCircle radius={100} />
-                <span className={timeIndicatorClasses} />
-                <Info>
+                <OuterCircle radius={100} colors={colors} />
+                <DayNightIndicator colors={colors}>
+                    {dayNightIcon}
+                </DayNightIndicator>
+                <Info colors={colors}>
                     {info}
                 </Info>
                 <SecondsHand
                     radius={100}
+                    colors={colors}
                     style={{
                         transform: `rotate(${secondsScale(seconds)}deg)`,
                     }}
                 />
                 <MinutesHand
                     radius={100}
+                    colors={colors}
                     style={{
                         transform: `rotate(${minutesScale(minutes)}deg)`,
                     }}
                 />
                 <HoursHand
                     radius={100}
+                    colors={colors}
                     style={{
                         transform: `rotate(${hoursScale(hours % 12)}deg)`,
                     }}
                 />
-                <InnerCircle radius={5} />
+                <InnerCircle radius={5} colors={colors} />
             </div>
         )
 
@@ -188,7 +227,7 @@ export default class Clock extends Component {
 
         return (
             <Widget>
-                <WidgetHeader title={title} />
+                <WidgetHeader title={title} icon={ClockIcon} />
                 <WidgetBody>
                     {body}
                 </WidgetBody>

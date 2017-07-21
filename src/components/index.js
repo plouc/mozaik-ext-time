@@ -1,5 +1,5 @@
 import Clock from '../containers/ClockContainer'
-import DigitalClock from './digital_clock'
+import DigitalClock from '../containers/DigitalClockContainer'
 
 export default {
     Clock,

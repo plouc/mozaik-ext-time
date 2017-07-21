@@ -1,6 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import Part from './Part'
+import Part, { partPropTypes } from './Part'
 
 const HorizontalPart = ({ width: _width, stroke, spacing, ...props }) => {
     const width = (_width - stroke - spacing) / 2 - spacing / 2
@@ -18,10 +17,6 @@ const HorizontalPart = ({ width: _width, stroke, spacing, ...props }) => {
     return <Part d={pathInstructions} {...props} />
 }
 
-HorizontalPart.propTypes = {
-    width: PropTypes.number.isRequired,
-    stroke: PropTypes.number.isRequired,
-    spacing: PropTypes.number.isRequired,
-}
+HorizontalPart.propTypes = partPropTypes
 
 export default HorizontalPart
