@@ -17,16 +17,16 @@ export default class DigitalClockTime extends Component {
         const { date, displaySeconds, width, color } = this.props
 
         const timeHeight = width * 0.2
+        const secondsHeight = timeHeight * 0.74
 
         const timeCharWidth = timeHeight * 0.6
-        const secondsCharWidth = timeCharWidth * 0.66
-        const secondsHeight = timeHeight * 0.66
+        const secondsCharWidth = timeCharWidth * 0.74
 
         const timeSpacing = timeCharWidth * 0.22
-        const secondsSpacing = timeSpacing * 0.66
+        const secondsSpacing = timeSpacing * 0.74
 
         const timeStroke = timeCharWidth * 0.1
-        const secondsStroke = timeStroke * 0.66
+        const secondsStroke = timeStroke * 0.74
 
         return (
             <svg width={width} height={timeHeight}>

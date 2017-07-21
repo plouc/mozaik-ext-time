@@ -112,7 +112,12 @@ export default class Clock extends Component {
         sunRise: PropTypes.string.isRequired,
         sunSet: PropTypes.string.isRequired,
         colors: PropTypes.object,
-        theme: PropTypes.object.isRequired,
+        theme: PropTypes.shape({
+            root: PropTypes.shape({
+                background: PropTypes.string.isRequired,
+                color: PropTypes.string.isRequired,
+            }).isRequired,
+        }).isRequired,
     }
 
     static defaultProps = {
