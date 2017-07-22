@@ -7,11 +7,14 @@
 [![Coverage Status][coverage-image]][coverage-url]
 ![widget count][widget-count-image]
 
+> :warning: This branch holds the code for Mozaïk v2, if you're looking for v1,
+> please have a look at the [dedicated branch](https://github.com/plouc/mozaik-ext-time/tree/mozaik-1). 
+
 ## Time — Clock
 
 > Show analog clock from local or another timezone.
 
-![clock](https://raw.githubusercontent.com/plouc/mozaik-ext-time/master/preview/time.clock.png)
+![clock](https://raw.githubusercontent.com/plouc/mozaik-ext-time/mozaik-2/preview/time.clock.png)
 
 ### parameters
 
@@ -26,22 +29,34 @@ key        | required | description
 ### usage
 
 ``` yaml
-- type:       time.clock
+#
+# Displaying date info
+#
+- extension:  time
+  widget:     Clock
   info:       date
   columns:    1
   rows:       1
   x:          0
   y:          0
-  
-- type:       time.clock
+
+#
+# Displaying timezone info
+#  
+- extension:  time
+  widget:     Clock
   info:       timezone
   timezone:   America/Los_Angeles
   columns:    1
   rows:       1
   x:          1
   y:          0
-  
-- type:       time.clock
+
+#
+# Displaying custom info
+#  
+- extension:  time
+  widget:     Clock
   info:       Time is money!
   columns:    1
   rows:       1
@@ -54,32 +69,43 @@ key        | required | description
 
 > Show digital clock from local or another timezone.
 
+![clock](https://raw.githubusercontent.com/plouc/mozaik-ext-time/mozaik-2/preview/time.digital_clock.png)
+
 ### parameters
 
 key              | required | default | description
 -----------------|----------|---------|------------------------------------------
-`displayWeekday` | no       | `true`  | *Enable/disable day of week display.*
+`displayDate`    | no       | `true`  | *Enable/disable date display.*
 `displaySeconds` | no       | `true`  | *Enable/disable seconds display.*
 `timezone`       | no       |         | *Name of the timezone, like `America/Los_Angeles`. See http://momentjs.com/timezone/ for possible values. Defaults to local time.*
 
 ### usage
 
 ``` yaml
-- type:           time.digital_clock
+- extension:      time
+  widget:         DigitalClock
   columns:        1
   rows:           1
   x:              0
   y:              0
 
-- type:           time.digital_clock
+#
+# Disabling time seconds
+#  
+- extension:      time
+  widget:         DigitalClock
   displaySeconds: false
   columns:        1
   rows:           1
   x:              1
   y:              0
 
-- type:           time.digital_clock
-  displayWeekday: false
+#
+# Disabling date
+#
+- extension:      time
+  widget:         DigitalClock
+  displayDate:    false
   columns:        1
   rows:           1
   x:              2
