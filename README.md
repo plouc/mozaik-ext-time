@@ -117,8 +117,8 @@ key              | required | default | description
 [license-url]: https://github.com/plouc/mozaik-ext-time/blob/master/LICENSE.md
 [travis-image]: https://img.shields.io/travis/plouc/mozaik-ext-time.svg?style=flat-square
 [travis-url]: https://travis-ci.org/plouc/mozaik-ext-time
-[npm-image]: https://img.shields.io/npm/v/mozaik-ext-time.svg?style=flat-square
-[npm-url]: https://www.npmjs.com/package/mozaik-ext-time
+[npm-image]: https://img.shields.io/npm/v/@mozaik/ext-time.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/@mozaik/ext-time
 [gemnasium-image]: https://img.shields.io/gemnasium/plouc/mozaik-ext-time.svg?style=flat-square
 [gemnasium-url]: https://gemnasium.com/plouc/mozaik-ext-time
 [coverage-image]: https://img.shields.io/coveralls/plouc/mozaik-ext-time.svg?style=flat-square
