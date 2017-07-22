@@ -1,12 +1,18 @@
+# Doc
 /preview
 
+# config
 .babelrc
-.eslintrc
+.eslintrc.yml
 .gitignore
 .npmignore
 .travis.yml
 
+# Logs
 npm-debug.log*
+
+# Non transpiled source code
+/src
 
 # Tests
 /test
@@ -18,3 +24,6 @@ ISSUE_TEMPLATE.md
 
 # OSX
 .DS_Store
+
+# IDE
+.idea

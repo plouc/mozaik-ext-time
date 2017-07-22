@@ -1,6 +1,6 @@
 {
   "name": "@mozaik/ext-time",
-  "version": "2.0.0-alpha.4",
+  "version": "2.0.0-alpha.10",
   "description": "Mozaik time widgets",
   "repository": {
     "type": "git",
@@ -33,7 +33,7 @@
     "lodash": "^4.17.4",
     "lodash-es": "^4.17.4",
     "moment": "^2.18.1",
-    "moment-timezone": "0.5.13",
+    "moment-timezone": "^0.5.13",
     "prop-types": "^15.5.10",
     "react-icons": "^2.2.5",
     "react-measure": "^2.0.2",

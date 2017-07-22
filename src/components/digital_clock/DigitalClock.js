@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import 'moment-timezone'
+import 'moment-timezone/builds/moment-timezone-with-data'
 import styled from 'styled-components'
 import Measure from 'react-measure'
 import { Widget } from '@mozaik/ui'
