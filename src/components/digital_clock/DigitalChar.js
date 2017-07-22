@@ -14,9 +14,11 @@ import {
     PartCenterBottom,
     PartCenterLeft,
     PartCenterRight,
+    PartObliqueTopLeft,
+    PartObliqueTopRight,
+    PartObliqueBottomRight,
+    PartObliqueBottomLeft,
 } from './parts'
-
-import ObliquePart from './parts/ObliquePart'
 
 export default class DigitalChar extends PureComponent {
     static propTypes = {
@@ -45,14 +47,23 @@ export default class DigitalChar extends PureComponent {
 
         return (
             <g transform={`translate(${x}, ${y})`}>
+                {/* Top parts */}
                 <PartTopLeft {...shapeProps} isActive={shape.topLeft} />
                 <PartTopRight {...shapeProps} isActive={shape.topRight} />
+
+                {/* Right parts */}
                 <PartRightTop {...shapeProps} isActive={shape.rightTop} />
                 <PartRightBottom {...shapeProps} isActive={shape.rightBottom} />
+
+                {/* Bottom parts */}
                 <PartBottomRight {...shapeProps} isActive={shape.bottomRight} />
                 <PartBottomLeft {...shapeProps} isActive={shape.bottomLeft} />
+
+                {/* Left parts */}
                 <PartLeftBottom {...shapeProps} isActive={shape.leftBottom} />
                 <PartLeftTop {...shapeProps} isActive={shape.leftTop} />
+
+                {/* Center parts */}
                 <PartCenterLeft {...shapeProps} isActive={shape.centerLeft} />
                 <PartCenterRight {...shapeProps} isActive={shape.centerRight} />
                 <PartCenterTop {...shapeProps} isActive={shape.centerTop} />
@@ -60,36 +71,23 @@ export default class DigitalChar extends PureComponent {
                     {...shapeProps}
                     isActive={shape.centerBottom}
                 />
-                <ObliquePart
+
+                {/* Oblique parts */}
+                <PartObliqueTopLeft
                     {...shapeProps}
                     isActive={shape.obliqueTopLeft}
-                    transform={`translate(${stroke + spacing / 2}, ${stroke +
-                        spacing / 2})`}
                 />
-                <ObliquePart
+                <PartObliqueTopRight
                     {...shapeProps}
                     isActive={shape.obliqueTopRight}
-                    transform={`translate(${width -
-                        stroke -
-                        spacing / 2}, ${stroke + spacing / 2}) scale(-1, 1)`}
                 />
-                <ObliquePart
+                <PartObliqueBottomRight
                     {...shapeProps}
                     isActive={shape.obliqueBottomRight}
-                    transform={`translate(${width / 2 +
-                        stroke / 2 +
-                        spacing / 2}, ${height / 2 +
-                        stroke / 2 +
-                        spacing / 2}) scale(-1) rotate(180)`}
                 />
-                <ObliquePart
+                <PartObliqueBottomLeft
                     {...shapeProps}
                     isActive={shape.obliqueBottomLeft}
-                    transform={`translate(${width / 2 -
-                        stroke / 2 -
-                        spacing / 2}, ${height / 2 +
-                        stroke / 2 +
-                        spacing / 2}) scale(-1, 1)`}
                 />
             </g>
         )
