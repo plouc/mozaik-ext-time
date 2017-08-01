@@ -2,6 +2,7 @@ item                        | info       | notes
 ----------------------------|------------|---------------------------------------------------------------------------------------------
 **node** version            |            | *output from `node --version`*
 **npm** version             |            | *output from `npm --version`*
+**yarn** version            |            | *output from `yarn --version`*
 **mozaik-ext-time** version |            | *available in project's `package.json`*
 **mozaik** version          |            | *available in project's `package.json`*
 **mozaik-demo** version     |            | *version of the demo used, depends on which method you used to setup your Mozaïk dashboard*
