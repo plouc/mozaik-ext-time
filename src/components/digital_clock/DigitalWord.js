@@ -20,16 +20,7 @@ export default class DigitalWord extends PureComponent {
     }
 
     render() {
-        const {
-            word,
-            charWidth,
-            charHeight,
-            stroke,
-            color,
-            spacing,
-            x,
-            y,
-        } = this.props
+        const { word, charWidth, charHeight, stroke, color, spacing, x, y } = this.props
 
         return (
             <g transform={`translate(${x}, ${y})`}>

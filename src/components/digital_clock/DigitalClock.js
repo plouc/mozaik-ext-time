@@ -85,11 +85,7 @@ export default class DigitalClock extends Component {
                         {({ measureRef }) =>
                             <div ref={measureRef} style={innerContainerStyle}>
                                 {shouldRenderDate &&
-                                    <DigitalClockDate
-                                        date={date}
-                                        width={width}
-                                        color={color}
-                                    />}
+                                    <DigitalClockDate date={date} width={width} color={color} />}
                                 {shouldRender &&
                                     <DigitalClockTime
                                         date={date}

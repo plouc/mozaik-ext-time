@@ -9,7 +9,7 @@
 .travis.yml
 
 # Logs
-npm-debug.log*
+*.log*
 
 # Non transpiled source code
 /src
@@ -20,7 +20,7 @@ npm-debug.log*
 /coverage
 
 # GitHub
-ISSUE_TEMPLATE.md
+/.github
 
 # OSX
 .DS_Store

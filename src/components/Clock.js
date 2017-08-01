@@ -49,9 +49,7 @@ export const HoursHand = Hand.extend`
     background-color: ${props => props.colors.hoursHand};
 `
 
-export const MinutesHand = Hand.extend`
-    background-color: ${props => props.colors.minutesHand};
-`
+export const MinutesHand = Hand.extend`background-color: ${props => props.colors.minutesHand};`
 
 export const SecondsHand = Hand.extend`
     height: 1px;
@@ -92,14 +90,8 @@ const getCurrentTimeParts = timezoneName => {
     }
 }
 
-const secondsScale = d3.scale
-    .linear()
-    .domain([0, 59 + 999 / 1000])
-    .range([-90, 270])
-const minutesScale = d3.scale
-    .linear()
-    .domain([0, 59 + 59 / 60])
-    .range([-90, 270])
+const secondsScale = d3.scale.linear().domain([0, 59 + 999 / 1000]).range([-90, 270])
+const minutesScale = d3.scale.linear().domain([0, 59 + 59 / 60]).range([-90, 270])
 const hoursScale = d3.scale.linear().domain([0, 11 + 59 / 60]).range([-90, 270])
 
 const sunFormats = ['HH:mm', 'H:mm', 'H:m']

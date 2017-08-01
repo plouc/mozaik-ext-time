@@ -4,8 +4,7 @@ import VerticalPart from './VerticalPart'
 
 const PartRightTop = props =>
     <VerticalPart
-        transform={`translate(${props.width - props.stroke}, ${props.stroke /
-            2 +
+        transform={`translate(${props.width - props.stroke}, ${props.stroke / 2 +
             props.spacing / 2})`}
         {...props}
     />

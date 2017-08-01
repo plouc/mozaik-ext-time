@@ -67,28 +67,13 @@ export default class DigitalChar extends PureComponent {
                 <PartCenterLeft {...shapeProps} isActive={shape.centerLeft} />
                 <PartCenterRight {...shapeProps} isActive={shape.centerRight} />
                 <PartCenterTop {...shapeProps} isActive={shape.centerTop} />
-                <PartCenterBottom
-                    {...shapeProps}
-                    isActive={shape.centerBottom}
-                />
+                <PartCenterBottom {...shapeProps} isActive={shape.centerBottom} />
 
                 {/* Oblique parts */}
-                <PartObliqueTopLeft
-                    {...shapeProps}
-                    isActive={shape.obliqueTopLeft}
-                />
-                <PartObliqueTopRight
-                    {...shapeProps}
-                    isActive={shape.obliqueTopRight}
-                />
-                <PartObliqueBottomRight
-                    {...shapeProps}
-                    isActive={shape.obliqueBottomRight}
-                />
-                <PartObliqueBottomLeft
-                    {...shapeProps}
-                    isActive={shape.obliqueBottomLeft}
-                />
+                <PartObliqueTopLeft {...shapeProps} isActive={shape.obliqueTopLeft} />
+                <PartObliqueTopRight {...shapeProps} isActive={shape.obliqueTopRight} />
+                <PartObliqueBottomRight {...shapeProps} isActive={shape.obliqueBottomRight} />
+                <PartObliqueBottomLeft {...shapeProps} isActive={shape.obliqueBottomLeft} />
             </g>
         )
     }

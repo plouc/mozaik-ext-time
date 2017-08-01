@@ -41,10 +41,7 @@ export default class DigitalClockDate extends Component {
                     height: dateHeight,
                 }}
             >
-                <svg
-                    width={dateCharWidth * 4 + dateSpacing * 3}
-                    height={dateHeight}
-                >
+                <svg width={dateCharWidth * 4 + dateSpacing * 3} height={dateHeight}>
                     <DigitalWord
                         word={date.format('YYYY')}
                         charWidth={dateCharWidth}
@@ -54,10 +51,7 @@ export default class DigitalClockDate extends Component {
                         color={color}
                     />
                 </svg>
-                <svg
-                    width={dateCharWidth * 2 + dateSpacing}
-                    height={dateHeight}
-                >
+                <svg width={dateCharWidth * 2 + dateSpacing} height={dateHeight}>
                     <DigitalWord
                         word={date.format('MM')}
                         charWidth={dateCharWidth}
@@ -67,10 +61,7 @@ export default class DigitalClockDate extends Component {
                         color={color}
                     />
                 </svg>
-                <svg
-                    width={dateCharWidth * 6 + dateSpacing * 5}
-                    height={dateHeight}
-                >
+                <svg width={dateCharWidth * 6 + dateSpacing * 5} height={dateHeight}>
                     <DigitalWord
                         word={date.format('DD')}
                         charWidth={dateCharWidth}

@@ -4,8 +4,8 @@ import HorizontalPart from './HorizontalPart'
 
 const PartBottomLeft = props =>
     <HorizontalPart
-        transform={`translate(${props.stroke / 2 +
-            props.spacing / 2}, ${props.height - props.stroke})`}
+        transform={`translate(${props.stroke / 2 + props.spacing / 2}, ${props.height -
+            props.stroke})`}
         {...props}
     />
 
