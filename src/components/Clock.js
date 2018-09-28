@@ -171,6 +171,7 @@ export default class Clock extends Component {
                 : this.props.timezone,
             date: this.state.moment.format('ll'),
             time: this.state.moment.format('LT'),
+            time24h: this.state.moment.format('HH:mm'),
         }
         const info = infoFields[this.props.info] || this.props.info
 
